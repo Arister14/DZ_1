@@ -40,5 +40,6 @@ def function_name(
         for k, v in kwargs.items():
             result_2 += ("Key: {}, Value: {}; ".format(k, v))
         return result_2
+
     else:
         raise ValueError("Error for search")
