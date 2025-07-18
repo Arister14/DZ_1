@@ -1,0 +1,16 @@
+def log_call(func):
+    def wrapper(*args, **kwargs):
+        print(f"Функция {func.__name__} вызвана с аргументами:")
+        print(f"Позиционные аргументы: {args}")
+        print(f"Именованные аргументы: {kwargs}")
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
+
+@log_call
+def calculate_area(length, width):
+    area = length * width
+    print(f"Площадь прямоугольника: {area}")
+
+# Пример вызова
+calculate_area(4, 48) #Можно ввести разные значения
