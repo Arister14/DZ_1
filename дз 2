@@ -1,0 +1,128 @@
+1. Возведение в степень
+# Ввод элементов через пробел
+
+elements = input("Введите элементы через пробел: ").split()
+
+# Ввод степени
+
+power = int(input("Введите степень: "))
+
+# Обработка и вывод результатов
+
+result = []
+
+for item in elements:
+
+    try:
+
+        num = int(item)
+
+        result.append(str(num ** power))
+
+    except ValueError:
+
+        result.append(item * power)
+
+print("Вывод:", " ".join(result))
+
+
+
+
+2. Преобразование словаря
+Не совсем поняла задание.
+
+# Ввод ключей через пробел и создание списка
+
+keys_input = input("Введите ключи через пробел: ")
+
+keys_list = list(map(int, keys_input.split()))
+
+# Ввод значений через пробел и создание списка
+
+values_input = input("Введите значения через пробел: ")
+
+values_list = list(map(int, values_input.split()))
+
+# Создаем словарь из введенных ключей и значений
+
+dct = dict(zip(keys_list, values_list))
+
+# Создаем множества ключей и значений
+
+keys_set = set(dct.keys())
+
+values_set = set(dct.values())
+
+# Объединяем множества
+
+union_set = keys_set.union(values_set)
+
+# Вывод результатов
+
+print("Множество ключей:", keys_set)
+
+print("Множество значений:", values_set)
+
+print("Объединение множеств:", union_set)
+
+
+
+
+
+3. Пересечение двух списков
+# Ввод первого списка с подсказкой
+
+list1_input = input("Введите первый список чисел через пробел: ")
+
+# Проверка, что список не пуст и ввод корректен
+
+while not list1_input.strip():
+
+    list1_input = input("Пожалуйста, введите хотя бы одно число: ")
+
+list1 = list(map(int, list1_input.split()))
+
+# Ввод второго списка с подсказкой
+
+list2_input = input("Введите второй список чисел через пробел: ")
+
+while not list2_input.strip():
+
+    list2_input = input("Пожалуйста, введите хотя бы одно число: ")
+
+list2 = list(map(int, list2_input.split()))
+
+# Находим общие элементы
+
+common_elements = set(list1).intersection(set(list2))
+
+# Выводим результат
+
+print("Общие элементы:", *common_elements)
+
+
+
+
+
+4. Подсчет количества слов
+text = input("Введите строку: ")  # После этого нажмите Enter только один раз
+
+words = text.split()
+
+word_counts = {}
+
+for word in words:
+
+    word_lower = word.lower()
+
+    if word_lower in word_counts:
+
+        word_counts[word_lower] += 1
+
+    else:
+
+        word_counts[word_lower] = 1
+
+for word, count in word_counts.items():
+
+    print(f"{word}: {count}")
