@@ -1,0 +1,141 @@
+import math
+from typing import Union, List
+
+def addition(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
+    if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
+        raise TypeError("Operands must be int или float")
+    return a + b
+
+def subtraction(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
+    if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
+        raise TypeError("Operands must be int или float")
+    return a - b
+
+def multiplication(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
+    if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
+        raise TypeError("Operands must be int или float")
+    return a * b
+
+def division(a: Union[int, float], b: Union[int, float], mode: str = 'float') -> Union[float, int]:
+    if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
+        raise TypeError("Operands must be int или float")
+    if b == 0:
+        raise ZeroDivisionError("Делитель не может быть нулем")
+    if mode == 'float':
+        return a / b
+    elif mode == 'floor':
+        return a // b
+    elif mode == 'remainder':
+        return a % b
+    else:
+        raise ValueError("Неверный режим деления. Используйте 'float', 'floor' или 'remainder'.")
+
+def power(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
+    if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
+        raise TypeError("Operands must be int или float")
+    return a ** b
+
+def factorial(n: int) -> int:
+    if not isinstance(n, int):
+        raise TypeError("Для факториала необходим целочисленный тип")
+    if n < 0:
+        raise ValueError("Факториал не определен для отрицательных чисел")
+    return math.factorial(n)
+
+def sine(x: float) -> float:
+    if not isinstance(x, (int, float)):
+        raise TypeError("Аргумент должен быть числом")
+    return math.sin(x)
+
+def median(numbers: List[Union[int, float]]) -> float:
+    if not all(isinstance(num, (int, float)) for num in numbers):
+        raise TypeError("Все элементы должны быть числами")
+    sorted_nums = sorted(numbers)
+    n = len(sorted_nums)
+    middle = n // 2
+    if n % 2 == 0:
+        return (sorted_nums[middle - 1] + sorted_nums[middle]) / 2
+    else:
+        return sorted_nums[middle]
+
+def main():
+    print("Добро пожаловать в калькулятор! Введите 'exit' для выхода.")
+    while True:
+        print("\nДоступные операции:")
+        print("1. Сложение")
+        print("2. Вычитание")
+        print("3. Умножение")
+        print("4. Деление")
+        print("5. Возведение в степень")
+        print("6. Факториал")
+        print("7. Синус")
+        print("8. Медиана")
+        print("--------------------")
+        choice = input("Операция: ").strip()
+
+        if choice.lower() == 'exit':
+            print("Завершение работы.")
+            break
+
+        try:
+            if choice == '1':
+                a = input("Первое число: ")
+                b = input("Второе число: ")
+                result = addition(float(a), float(b))
+                print(f"Результат: {result}")
+
+            elif choice == '2':
+                a = input("Уменьшаемое: ")
+                b = input("Вычитаемое: ")
+                result = subtraction(float(a), float(b))
+                print(f"Результат: {result}")
+
+            elif choice == '3':
+                a = input("Первое число: ")
+                b = input("Второе число: ")
+                result = multiplication(float(a), float(b))
+                print(f"Результат: {result}")
+
+            elif choice == '4':
+                a = input("Делимое: ")
+                b = input("Делитель: ")
+                mode = input("Выберите режим деления ('float', 'floor', 'remainder'): ").strip()
+                result = division(float(a), float(b), mode)
+                print(f"Результат: {result}")
+
+            elif choice == '5':
+                a = input("Основание: ")
+                b = input("Степень: ")
+                result = power(float(a), float(b))
+                print(f"Результат: {result}")
+
+            elif choice == '6':
+                n = input("Число для факториала: ")
+                result = factorial(int(n))
+                print(f"Результат: {result}")
+
+            elif choice == '7':
+                x = input("Введите число: ")
+                result = sine(float(x))
+                print(f"Синус: {result}")
+
+            elif choice == '8':
+                nums_str = input("Список чисел через пробел: ")
+                nums = list(map(float, nums_str.split()))
+                result = median(nums)
+                print(f"Медиана: {result}")
+
+            else:
+                print("Некорректный выбор. Попробуйте снова.")
+
+        except ZeroDivisionError as zde:
+            print(f"Ошибка: {zde}")
+        except ValueError as ve:
+            print(f"Ошибка: {ve}")
+        except TypeError as te:
+            print(f"Ошибка: {te}")
+        except Exception as e:
+            print(f"Произошла ошибка: {e}")
+
+if __name__ == "__main__":
+    main()
