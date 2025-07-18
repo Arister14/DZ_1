@@ -1,0 +1,55 @@
+from typing import List
+
+class Animal:
+    # Атрибут класса
+    kingdom: str = "Animalia"
+    species_count: int = 0
+
+    def __init__(self, name: str, age: int, species: str, habitat: str, is_endangered: bool) -> None:
+        self.name: str = name
+        self.age: int = age
+        self.species: str = species
+        self.habitat: str = habitat
+        self.is_endangered: bool = is_endangered
+        # Дополнительные атрибуты объекта
+        self.traits: List[str] = []
+        self.health_status: str = "Healthy"
+        self.food: str = ""
+        self.is_active: bool = True
+        self.location: str = habitat
+        # Увеличиваем счетчик видов при создании нового животного
+        Animal.species_count += 1
+
+    def __str__(self) -> str:
+        return f"{self.name} ({self.species}), Age: {self.age}, Habitat: {self.habitat}"
+
+    def __repr__(self) -> str:
+        return (f"Animal(name={self.name}, age={self.age}, species={self.species}, "
+                f"habitat={self.habitat}, endangered={self.is_endangered})")
+
+    def make_sound(self) -> str:
+        # Пример метода, возвращающего звук животного
+        return "Some generic animal sound"
+
+    def move(self, new_location: str) -> None:
+        self.location = new_location
+        print(f"{self.name} moved to {self.location}")
+
+    def update_health(self, status: str) -> None:
+        self.health_status = status
+
+    def add_trait(self, trait: str) -> None:
+        self.traits.append(trait)
+
+# Создаем несколько объектов
+animal1 = Animal("Leo", 5, "Lion", "Savannah", False)
+animal2 = Animal("Ella", 3, "Elephant", "Grasslands", False)
+
+# Используем методы
+print(animal1)
+print(animal2.make_sound())
+animal1.move("Waterhole")
+animal2.update_health("Injured")
+animal2.add_trait("Gentle")
+print(animal2.traits)
+print(f"Total animal species count: {Animal.species_count}")
