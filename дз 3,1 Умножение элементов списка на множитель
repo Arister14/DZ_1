@@ -1,0 +1,33 @@
+from typing import List
+
+def multiply_list(elements: List[int], multiplier: int = 2) -> List[int]:
+    """
+    Умножает каждый элемент списка на множитель.
+    
+    :param elements: список чисел
+    :param multiplier: множитель (по умолчанию 2)
+    :return: новый список с умноженными элементами
+    """
+    return [element * multiplier for element in elements]
+
+# Аналогичная операция с помощью лямбда-функции и map()
+multiply_lambda = lambda elements, multiplier=2: list(map(lambda x: x * multiplier, elements))
+
+# Ввод данных
+numbers = list(map(int, input("Введите список чисел через пробел: ").split()))
+multiplier_input = input("Введите множитель (по умолчанию 2): ")
+
+if multiplier_input.strip() == '':
+    multiplier_value = 2
+else:
+    multiplier_value = int(multiplier_input)
+
+# Использование функции
+result_func = multiply_list(numbers, multiplier_value)
+
+# Использование лямбда
+result_lambda = multiply_lambda(numbers, multiplier_value)
+
+# Вывод результатов
+print("Результат (функция):", result_func)
+print("Результат (лямбда-функция):", result_lambda)
