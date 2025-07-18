@@ -1,0 +1,45 @@
+def append_to_file(filename, text):
+    """Appends text to a file (creates new file if doesn't exist)."""
+    try:
+        with open(filename, 'a') as file:  # No encoding specified - uses system default
+            file.write(text + '\n')  # Add newline character
+        return True
+    except IOError as e:
+        print(f"Error writing to file: {e}")
+        return False
+
+def display_file_contents(filename):
+    """Displays current contents of the file."""
+    try:
+        with open(filename, 'r') as file:  # No encoding specified
+            print("\nCurrent file contents:")
+            print(file.read())
+    except FileNotFoundError:
+        print("File doesn't exist yet.")
+    except IOError as e:
+        print(f"Error reading file: {e}")
+
+def main():
+    print("=== File Editor ===")
+    filename = input("Enter filename: ").strip()
+    
+    while True:
+        print("\n1. Add text")
+        print("2. View contents")
+        print("3. Exit")
+        choice = input("Choose an option: ").strip()
+        
+        if choice == '1':
+            text = input("Enter text to add: ")
+            if append_to_file(filename, text):
+                print(f"Text added to '{filename}'!")
+        elif choice == '2':
+            display_file_contents(filename)
+        elif choice == '3':
+            print("Exiting...")
+            break
+        else:
+            print("Error: Please choose 1, 2 or 3.")
+
+if __name__ == "__main__":
+    main()
