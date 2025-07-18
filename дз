@@ -1,0 +1,98 @@
+# Я совместила все задания в 1 Код:
+
+# Запрос данных у пользователя
+
+name = input("Ваше имя: ")
+
+surname = input("Фамилия: ")
+
+age_input = input("Возраст: ")
+
+# Проверка, является ли возраст числом и целым
+
+try:
+
+    age = int(age_input)
+
+except ValueError:
+
+    print("Возраст должен быть числом!")
+
+    age = None
+
+
+
+if age is not None:
+
+    # Проверка на четность
+
+    if age % 2 == 0:
+
+        parity = "четное"
+
+    else:
+
+        parity = "нечетное"
+
+
+
+    # Проверка, является ли возрастом взрослым
+
+    if age < 0:
+
+        age_status = "Возраст не может быть отрицательным."
+
+    elif age <= 17:
+
+        age_status = "Вы еще не совершеннолетний."
+
+    else:
+
+        age_status = "Вы совершеннолетний."
+
+
+
+    # Подсчет длины числа без учета знака
+
+    age_str = str(abs(age))
+
+    length = len(age_str)
+
+
+
+# Вывод с использованием метода format()
+
+print("\nРеализация через format:")
+
+if age is not None:
+
+    print("Ваше имя: {}, Фамилия: {}, Возраст: {} лет".format(name, surname, age))
+
+    print("Возраст {}. Четность: {}. {}".format(age, parity, age_status))
+
+    print("Длина числа возраста: {} цифр.".format(length))
+
+else:
+
+    print("Некорректный возраст, информация не может быть отображена.")
+
+
+
+# Вывод с использованием f-string
+
+print("\nРеализация через f-string:")
+
+if age is not None:
+
+    print(f"Ваше имя: {name}, Фамилия: {surname}, Возраст: {age} лет")
+
+    print(f"Возраст {age}. Четность: {parity}. {age_status}")
+
+    print(f"Длина числа возраста: {length} цифр.")
+
+else:
+
+    print("Некорректный возраст, информация не может быть отображена.")
+
+
+
