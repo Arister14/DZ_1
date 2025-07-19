@@ -1,0 +1,99 @@
+1. Тестирование функции с использованием assert
+def average_num(list_num: list) -> float:
+    if not list_num:
+        return "Empty list"
+    for ind, el in enumerate(list_num):
+        if not isinstance(el, (int, float)):
+            try:
+                list_num[ind] = int(el)
+            except:
+                return "Bad request"
+    return round(sum(list_num) / len(list_num), 2)
+
+# Тесты
+assert average_num([1, 1]) == 1  # тест с целыми числами
+assert average_num([2.5, 3.5]) == 3.0  # тест с числами с плавающей точкой
+assert average_num([1, 2, 3, 4]) == 2.5  # сумма 10, длина 4, среднее 2.5
+assert average_num([1, '2', 3.0]) == 2.0  # строка, которая конвертируется в число
+assert average_num(['5', '10']) == 7.5  # строки-конвертируемые в числа
+assert average_num(['a', 2]) == "Bad request"  # неконвертируемая строка
+assert average_num([]) == "Empty list"  # пустой список
+
+
+
+
+2. Тестирование корректности работы со строками
+import re
+
+def is_palindrome(s: str) -> bool:
+ 
+    cleaned = re.sub(r'[^A-Za-zА-Яа-я0-9]', '', s.lower())
+    return cleaned == cleaned[::-1]
+
+# Тесты
+assert is_palindrome("Лёша на полке клопа нашёл") == True
+assert is_palindrome("Madam") == True  
+assert is_palindrome("Hello") == False 
+assert is_palindrome("А роза упала на лапу Азора") == True 
+assert is_palindrome("12321") == True  
+import re
+
+def is_palindrome(s: str) -> bool:
+    
+    cleaned = re.sub(r'[^A-Za-zА-Яа-я0-9]', '', s.lower())
+    return cleaned == cleaned[::-1]
+
+user_input = input("Введите фразу для проверки, является ли она палиндромом: ")
+
+if is_palindrome(user_input):
+    print("Это палиндром!")
+else:
+    print("Это не палиндром.")
+
+
+
+3. Тестирование с unittest
+import unittest
+import sys
+
+def factorial(n: int):
+    if n < 0:
+        raise ValueError("Факториал отрицательного числа не определен")
+    if n == 0:
+        return 1
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+        if result > sys.maxsize:
+            raise ValueError(f"Факториал для {n} не поддерживается типом int")
+    return result
+
+class TestFactorial(unittest.TestCase):
+
+    def test_zero(self):
+        self.assertEqual(factorial(0), 1)
+
+    def test_one(self):
+        self.assertEqual(factorial(1), 1)
+
+    def test_small_number(self):
+        self.assertEqual(factorial(5), 120)
+
+    def test_medium_number(self):
+        self.assertEqual(factorial(10), 3628800)
+
+    def test_negative(self):
+        with self.assertRaises(ValueError):
+            factorial(-3)
+
+    def test_large_number_within_limit(self):
+        # 20! не превышает sys.maxsize
+        self.assertEqual(factorial(20), 2432902008176640000)
+
+    def test_large_number_exceeds_limit(self):
+        # 21! превышает sys.maxsize, ожидаем исключение
+        with self.assertRaises(ValueError):
+            factorial(21)
+
+if __name__ == '__main__':
+    unittest.main()
