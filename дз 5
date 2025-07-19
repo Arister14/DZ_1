@@ -1,0 +1,117 @@
+1. Рандомные имена файлов
+import random
+import string
+from pathlib import Path
+
+# Укажите директорию для сохранения файлов
+directory = Path('random_files')
+directory.mkdir(parents=True, exist_ok=True)
+
+files = []
+
+for _ in range(10):
+    # Генерируем случайное имя файла из 8 букв и цифр
+    filename = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+    # Добавляем расширение .txt
+    filename_with_ext = filename + '.txt'
+    # Полный путь к файлу
+    file_path = directory / filename_with_ext
+    # Создаем пустой файл
+    file_path.touch()
+    files.append(file_path)
+
+# Вывод абсолютных путей
+for file in files:
+    print(file.resolve())
+
+
+
+2. Математические операции
+import random
+import math
+import statistics
+
+# Генерация списка из 100 случайных чисел от 1 до 100
+numbers = [random.randint(1, 100) for _ in range(100)]
+
+# Вычисление среднего арифметического
+mean_value = statistics.mean(numbers)
+
+# Вычисление медианы
+median_value = statistics.median(numbers)
+
+# Вычисление стандартного отклонения
+stdev_value = statistics.stdev(numbers)
+
+# Вычисление суммы всех чисел
+total_sum = sum(numbers)
+
+# Вычисление квадратного корня из суммы и округление
+sqrt_sum = math.sqrt(total_sum)
+rounded_sqrt_sum = round(sqrt_sum)
+
+# Вывод результатов
+print(f"Среднее арифметическое: {mean_value}")
+print(f"Медиана: {median_value}")
+print(f"Стандартное отклонение: {stdev_value}")
+print(f"Округленное значение квадратного корня из суммы всех чисел: {rounded_sqrt_sum}")
+
+
+
+3. Информация о пользователе
+import random
+import json
+import string
+
+# Функция для генерации случайной строки пароля
+def generate_password(length=12):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choices(characters, k=length))
+    return password
+
+# Генерация данных пользователя
+user_data = {
+    "name": "Полина Саит",
+    "age": random.randint(5, 120),  # случайный возраст от 18 до 70
+    "email": "john.doe@example.com",
+    "password": generate_password()
+}
+
+# Сохранение в JSON-файл
+file_path = 'user_data.json'
+with open(file_path, 'w', encoding='utf-8') as f:
+    json.dump(user_data, f, ensure_ascii=False, indent=4)
+
+# Чтение из файла и вывод
+with open(file_path, 'r', encoding='utf-8') as f:
+    loaded_data = json.load(f)
+
+print(json.dumps(loaded_data, ensure_ascii=False, indent=4))
+
+
+
+
+
+4. Разница случайных дат
+import random
+import datetime
+
+# Функция для генерации случайной даты за последние 5 лет
+def generate_random_date():
+    today = datetime.date.today()
+    start_date = today - datetime.timedelta(days=5*365)
+    random_days = random.randint(0, (today - start_date).days)
+    return start_date + datetime.timedelta(days=random_days)
+
+# Создаем список из 10 случайных дат
+dates_list = [generate_random_date().isoformat() for _ in range(10)]
+
+dates = [datetime.date.fromisoformat(date_str) for date_str in dates_list]
+
+dates.sort()
+
+# Вычисляем разницу между соседними датами
+for i in range(len(dates) - 1):
+    delta = (dates[i+1] - dates[i]).days
+    print(f"Разница между {dates[i]} и {dates[i+1]}: {delta} дней")
+    
